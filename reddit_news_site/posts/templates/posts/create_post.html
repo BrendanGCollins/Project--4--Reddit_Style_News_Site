@@ -1,0 +1,11 @@
+{% extends 'base.html' %}  <!-- Extends the base template to use common navigation and styling -->
+
+{% block content %}
+<h1>Create a New Post</h1>
+<!-- Form to create a new post -->
+<form method="post">
+    {% csrf_token %}  <!-- CSRF token for security -->
+    {{ form.as_p }}  <!-- Display the form fields -->
+    <button type="submit">Create Post</button>  <!-- Button to submit the new post -->
+</form>
+{% endblock %}
