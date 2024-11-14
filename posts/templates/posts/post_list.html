@@ -1,24 +1,36 @@
 {% extends 'base.html' %}  <!-- Extends the base template to use common navigation and styling -->
 
 {% block content %}
-<h1>All Posts</h1>
-<!-- Loop through all the posts passed from the view -->
-{% for post in posts %}
-    <div>
-        <!-- Title of the post linking to its detail view -->
-        <h2><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h2>
-        <p>Author: {{ post.author.username }}</p>  <!-- Display post author -->
-        <p>
-            Category: 
-            {% if post.category %}
-                {{ post.category.name }}
-            {% else %}
-                No Category
-            {% endif %}
-        </p>
-        <p>{{ post.created_at }}</p>  <!-- Display post creation date -->
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <h1 class="mb-4 text-center">All Posts</h1>
+
+        <!-- Loop through all the posts passed from the view -->
+        {% for post in posts %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <!-- Title of the post linking to its detail view -->
+                    <h2 class="card-title">
+                        <a href="{% url 'post_detail' post.id %}" class="text-decoration-none text-dark">{{ post.title }}</a>
+                    </h2>
+                    <p class="text-muted">Author: {{ post.author.username }} | {{ post.created_at }}</p>
+                    <p>
+                        <span class="badge bg-primary">
+                            {% if post.category %}
+                                {{ post.category.name }}
+                            {% else %}
+                                No Category
+                            {% endif %}
+                        </span>
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+
+        <!-- Link to create a new post -->
+        <div class="text-center">
+            <a href="{% url 'create_post' %}" class="btn btn-success">Create a New Post</a>
+        </div>
     </div>
-{% endfor %}
-<!-- Link to create a new post -->
-<a href="{% url 'create_post' %}">Create a New Post</a>
+</div>
 {% endblock %}
