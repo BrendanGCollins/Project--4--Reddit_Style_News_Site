@@ -57,7 +57,7 @@ ROOT_URLCONF = 'reddit_news_site.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],  # Add template directory
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
