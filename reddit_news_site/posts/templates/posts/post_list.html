@@ -1,0 +1,17 @@
+{% extends 'base.html' %}  <!-- Extends the base template to use common navigation and styling -->
+
+{% block content %}
+<h1>All Posts</h1>
+<!-- Loop through all the posts passed from the view -->
+{% for post in posts %}
+    <div>
+        <!-- Title of the post linking to its detail view -->
+        <h2><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h2>
+        <p>Author: {{ post.author.username }}</p>  <!-- Display post author -->
+        <p>Category: {{ post.category.name if post.category else 'No Category' }}</p>  <!-- Display category if exists -->
+        <p>{{ post.created_at }}</p>  <!-- Display post creation date -->
+    </div>
+{% endfor %}
+<!-- Link to create a new post -->
+<a href="{% url 'create_post' %}">Create a New Post</a>
+{% endblock %}
