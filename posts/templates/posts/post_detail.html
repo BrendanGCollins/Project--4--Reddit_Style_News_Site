@@ -4,7 +4,11 @@
 <h1>{{ post.title }}</h1>  <!-- Display the post title -->
 <p>By {{ post.author.username }} on {{ post.created_at }}</p>  <!-- Display post author and creation date -->
 <p>{{ post.content }}</p>  <!-- Display post content -->
-<p>Category: {{ post.category.name if post.category else 'No Category' }}</p>  <!-- Display category if exists -->
+{% if post.category %}
+    <p>Category: {{ post.category.name }}</p>
+{% else %}
+    <p>Category: No Category</p>
+{% endif %}
 
 <h2>Comments:</h2>
 <!-- Loop through each comment associated with the post -->
