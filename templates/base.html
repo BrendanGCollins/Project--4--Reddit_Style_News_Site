@@ -28,6 +28,17 @@
         </div>
     </nav>
 
+    <!-- Messages Section -->
+    <div class="container mt-3">
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="alert alert-{{ message.tags }} mt-2">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
     <!-- Main Content Container -->
     <div class="container mt-4">
         {% block content %}
