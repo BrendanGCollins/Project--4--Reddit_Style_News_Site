@@ -1,0 +1,30 @@
+{% extends 'base.html' %}  <!-- Extends the base template to use common navigation and styling -->
+
+{% block content %}
+<h1>{{ post.title }}</h1>  <!-- Display the post title -->
+<p>By {{ post.author.username }} on {{ post.created_at }}</p>  <!-- Display post author and creation date -->
+<p>{{ post.content }}</p>  <!-- Display post content -->
+<p>Category: {{ post.category.name if post.category else 'No Category' }}</p>  <!-- Display category if exists -->
+
+<h2>Comments:</h2>
+<!-- Loop through each comment associated with the post -->
+{% for comment in comments %}
+    <p>{{ comment.author.username }}: {{ comment.content }}</p>  <!-- Display comment author and content -->
+{% endfor %}
+
+<!-- If user is logged in, show the comment form -->
+{% if user.is_authenticated %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Display the comment form -->
+        <button type="submit">Add Comment</button>  <!-- Button to submit the comment -->
+    </form>
+{% else %}
+    <!-- If the user is not logged in, prompt them to log in -->
+    <p><a href="{% url 'login' %}">Log in</a> to leave a comment.</p>
+{% endif %}
+
+<!-- Links for the author to edit or delete the post -->
+<a href="{% url 'update_post' post.id %}">Edit Post</a>
+<a href="{% url 'delete_post' post.id %}">Delete Post</a>
+{% endblock %}
