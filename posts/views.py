@@ -85,3 +85,25 @@ def delete_post(request, post_id):
         return redirect('home')
 
     return render(request, 'posts/delete_post.html', {'post': post})
+
+# Upvote a post
+@login_required(login_url='login')
+def upvote_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    if not post.upvotes.filter(id=request.user.id).exists():
+        post.upvotes.add(request.user)
+        messages.success(request, "You have successfully upvoted this post.")
+    else:
+        messages.info(request, "You have already upvoted this post.")
+    return redirect('post_detail', post_id=post_id)
+
+# Upvote a comment
+@login_required(login_url='login')
+def upvote_comment(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+    if not comment.upvotes.filter(id=request.user.id).exists():
+        comment.upvotes.add(request.user)
+        messages.success(request, "You have successfully upvoted this comment.")
+    else:
+        messages.info(request, "You have already upvoted this comment.")
+    return redirect('post_detail', post_id=comment.post.id)
