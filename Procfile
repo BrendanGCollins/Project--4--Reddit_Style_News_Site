@@ -1,1 +1,1 @@
-web: gunicorn reddit-style-news-site.wsgi --log-file -
+web: gunicorn reddit_news_site.wsgi --log-file -
