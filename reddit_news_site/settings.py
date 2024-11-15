@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,13 +20,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-^@d#_iza&w%7s@9x)rt&jys3@-!(nx6j2zi8k@p@ghe8^_ammz'
+SECRET_KEY = (
+    'django-insecure-^@d#_iza&w%7s@9x)rt&jys3@-!(nx6j2zi8k@p@ghe8^_ammz'
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['reddit-style-news-site-44d5820c6a01.herokuapp.com']
-
+ALLOWED_HOSTS = [
+    'reddit-style-news-site-44d5820c6a01.herokuapp.com'
+]
 
 # Application definition
 
@@ -45,7 +47,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # Whitenoise middleware for serving static files
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Whitenoise for static files
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -59,7 +61,10 @@ ROOT_URLCONF = 'reddit_news_site.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates', BASE_DIR / 'users/templates'],  # Add both global and app-level directories
+        'DIRS': [
+            BASE_DIR / 'templates',
+            BASE_DIR / 'users/templates',
+        ],  # Add both global and app-level directories
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -91,16 +96,25 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation'
+            '.UserAttributeSimilarityValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.MinimumLengthValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.CommonPasswordValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.NumericPasswordValidator'
+        ),
     },
 ]
 
@@ -121,14 +135,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # Add this line to set the static root directory for collectstatic
+STATIC_ROOT = BASE_DIR / 'staticfiles' # Static root direc for collectstatic
 
-# This tells Django to use Whitenoise to serve static files.
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# Tell Django to use Whitenoise to serve static files.
+STATICFILES_STORAGE = (
+    'whitenoise.storage.CompressedManifestStaticFilesStorage'
+)
 
-# Additional configuration to ensure Whitenoise can handle static files properly
+# Additional configuration so Whitenoise can handle static files properly
 STATICFILES_DIRS = [
-    BASE_DIR / "static",  # Ensure static files are included for development purposes
+    BASE_DIR / "static",  # Include static files for development
 ]
 
 # Default primary key field type
