@@ -1,57 +1,107 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Category model for grouping posts into categories
 class Category(models.Model):
-    name = models.CharField(max_length=255)  # Category name
+    # Category name
+    name = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.name  # Return category name as string representation
+        # Return category name as string representation
+        return self.name
+
 
 # Post model representing a news post
 class Post(models.Model):
-    title = models.CharField(max_length=255)  # Post title
-    content = models.TextField()  # Post content
-    author = models.ForeignKey(User, on_delete=models.CASCADE)  # Link to author (User)
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)  # Optional category
-    created_at = models.DateTimeField(auto_now_add=True)  # Auto-populated timestamp for creation
-    updated_at = models.DateTimeField(auto_now=True)  # Auto-updated timestamp for modifications
-    upvotes = models.ManyToManyField(User, related_name='post_upvotes', blank=True)  # Track users who upvoted
+    # Post title
+    title = models.CharField(max_length=255)
+
+    # Post content
+    content = models.TextField()
+
+    # Link to author (User)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    # Optional category
+    category = models.ForeignKey(
+        Category, on_delete=models.SET_NULL, null=True, blank=True
+    )
+
+    # Auto-populated timestamp for creation
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    # Auto-updated timestamp for modifications
+    updated_at = models.DateTimeField(auto_now=True)
+
+    # Track users who upvoted
+    upvotes = models.ManyToManyField(
+        User, related_name='post_upvotes', blank=True
+    )
 
     def __str__(self):
-        return self.title  # Return post title as string representation
+        # Return post title as string representation
+        return self.title
 
     def upvote_count(self):
-        return self.upvotes.count()  # Return count of upvotes
+        # Return count of upvotes
+        return self.upvotes.count()
 
     def upvote(self, user):
+        # Add user to upvotes if they haven't already upvoted
         if not self.upvotes.filter(id=user.id).exists():
-            self.upvotes.add(user)  # Add user to upvotes if they haven't already upvoted
+            self.upvotes.add(user)
+
 
 # Comment model representing comments on posts
 class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')  # Link to post
-    author = models.ForeignKey(User, on_delete=models.CASCADE)  # Link to author (User)
-    content = models.TextField()  # Comment content
-    created_at = models.DateTimeField(auto_now_add=True)  # Timestamp for creation
-    upvotes = models.ManyToManyField(User, related_name='comment_upvotes', blank=True)  # Track users who upvoted
+    # Link to post
+    post = models.ForeignKey(
+        Post, on_delete=models.CASCADE, related_name='comments'
+    )
+
+    # Link to author (User)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    # Comment content
+    content = models.TextField()
+
+    # Timestamp for creation
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    # Track users who upvoted
+    upvotes = models.ManyToManyField(
+        User, related_name='comment_upvotes', blank=True
+    )
 
     def __str__(self):
-        return f'Comment by {self.author.username} on {self.post.title}'  # String representation
+        # String representation
+        return f'Comment by {self.author.username} on {self.post.title}'
 
     def upvote_count(self):
-        return self.upvotes.count()  # Return count of upvotes
+        # Return count of upvotes
+        return self.upvotes.count()
 
     def upvote(self, user):
+        # Add user to upvotes if they haven't already upvoted
         if not self.upvotes.filter(id=user.id).exists():
-            self.upvotes.add(user)  # Add user to upvotes if they haven't already upvoted
+            self.upvotes.add(user)
+
 
 # UserProfile model extending the default User model to add more fields
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)  # Link to default Django User
-    bio = models.TextField(blank=True)  # Optional bio field
-    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)  # Optional avatar image
-    website = models.URLField(blank=True)  # Optional personal website link
+    # Link to default Django User
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    # Optional bio field
+    bio = models.TextField(blank=True)
+
+    # Optional avatar image
+    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
+
+    # Optional personal website link
+    website = models.URLField(blank=True)
 
     def __str__(self):
-        return f'Profile of {self.user.username}'  # String representation
+        # String representation
+        return f'Profile of {self.user.username}'
