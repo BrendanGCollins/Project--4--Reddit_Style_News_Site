@@ -19,7 +19,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='comment',
             name='upvotes',
-            field=models.ManyToManyField(blank=True, related_name='comment_upvotes', to=settings.AUTH_USER_MODEL),
+            field=models.ManyToManyField(
+                blank=True,
+                related_name='comment_upvotes',
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
         migrations.RemoveField(
             model_name='post',
@@ -28,6 +32,10 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='post',
             name='upvotes',
-            field=models.ManyToManyField(blank=True, related_name='post_upvotes', to=settings.AUTH_USER_MODEL),
+            field=models.ManyToManyField(
+                blank=True,
+                related_name='post_upvotes',
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]
