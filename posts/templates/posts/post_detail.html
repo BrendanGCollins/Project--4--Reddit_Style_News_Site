@@ -4,6 +4,19 @@
 <h1>{{ post.title }}</h1>  <!-- Display the post title -->
 <p>By {{ post.author.username }} on {{ post.created_at }}</p>  <!-- Display post author and creation date -->
 <p>{{ post.content }}</p>  <!-- Display post content -->
+<p>Upvotes: {{ post.upvote_count }}</p>  <!-- Display post upvote count -->
+
+<!-- Upvote button for post -->
+{% if user.is_authenticated %}
+    <form method="post" action="{% url 'upvote_post' post.id %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-success">Upvote Post</button>  <!-- Upvote post button -->
+    </form>
+{% else %}
+    <p><a href="{% url 'login' %}">Log in</a> to upvote this post.</p>
+{% endif %}
+
+<!-- Display post category if available -->
 {% if post.category %}
     <p>Category: {{ post.category.name }}</p>
 {% else %}
@@ -13,7 +26,20 @@
 <h2>Comments:</h2>
 <!-- Loop through each comment associated with the post -->
 {% for comment in comments %}
-    <p>{{ comment.author.username }}: {{ comment.content }}</p>  <!-- Display comment author and content -->
+    <div class="comment">
+        <p>{{ comment.author.username }}: {{ comment.content }}</p>  <!-- Display comment author and content -->
+        <p>Upvotes: {{ comment.upvote_count }}</p>  <!-- Display comment upvote count -->
+
+        <!-- Upvote button for comment -->
+        {% if user.is_authenticated %}
+            <form method="post" action="{% url 'upvote_comment' comment.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Upvote Comment</button>  <!-- Upvote comment button -->
+            </form>
+        {% else %}
+            <p><a href="{% url 'login' %}">Log in</a> to upvote this comment.</p>
+        {% endif %}
+    </div>
 {% endfor %}
 
 <!-- If user is logged in, show the comment form -->
@@ -21,7 +47,7 @@
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}  <!-- Display the comment form -->
-        <button type="submit">Add Comment</button>  <!-- Button to submit the comment -->
+        <button type="submit" class="btn btn-primary">Add Comment</button>  <!-- Button to submit the comment -->
     </form>
 {% else %}
     <!-- If the user is not logged in, prompt them to log in -->
@@ -29,6 +55,8 @@
 {% endif %}
 
 <!-- Links for the author to edit or delete the post -->
-<a href="{% url 'update_post' post.id %}">Edit Post</a>
-<a href="{% url 'delete_post' post.id %}">Delete Post</a>
+{% if user == post.author %}
+    <a href="{% url 'update_post' post.id %}" class="btn btn-warning">Edit Post</a>
+    <a href="{% url 'delete_post' post.id %}" class="btn btn-danger">Delete Post</a>
+{% endif %}
 {% endblock %}
