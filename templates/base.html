@@ -12,7 +12,10 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <!-- Navbar Brand (Ireland's Talking) is centered with 'mx-auto' -->
-            <a class="navbar-brand text-success font-weight-bold h1 mx-auto" href="{% url 'home' %}">Ireland's Talking</a>
+            <a class="navbar-brand text-success font-weight-bold h1 mx-auto" href="{% url 'home' %}">
+                <img src="{% static 'Images/ireland.png' %}" alt="Ireland's Logo" style="height: 30px; width: auto; margin-right: 8px;">
+                Ireland's Talking
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>  <!-- Hamburger icon for mobile view -->
             </button>
