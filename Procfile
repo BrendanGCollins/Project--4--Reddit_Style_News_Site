@@ -1,0 +1,1 @@
+web: gunicorn reddit-style-news-site.wsgi --log-file -
