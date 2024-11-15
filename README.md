@@ -84,7 +84,8 @@ Here is a screenshot of the mobile view of the application:
 ## Testing
 
 - **Manual Testing**: Each feature has been manually tested to ensure proper functioning.
-- **Automated Testing**: 
+- **Automated Testing**: Code was run through Flake8 and no errors identified. Image of test result below.
+![Flake8 Test Result](static/Images/Flake8_test_result.png)
   
   _
 
