@@ -2,7 +2,15 @@
 
 The Reddit-Style News Site is a Django-based full-stack web application where users can create posts, comment, and upvote posts and comments. The platform features a categorized system to organize content and interactions through voting.
 
-**I need to add Images here**
+### Desktop View
+Here is a screenshot of the desktop view of the application:
+
+![Desktop View](static/Images/Desktop.png)
+
+### Mobile View
+Here is a screenshot of the mobile view of the application:
+
+![Mobile View](static/Images/Mobile.png)
 
 ## Features
 
