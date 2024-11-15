@@ -21,5 +21,9 @@ urlpatterns = [
     path('post/<int:post_id>/upvote/', views.upvote_post, name='upvote_post'),
 
     # Upvote a comment
-    path('comment/<int:comment_id>/upvote/', views.upvote_comment, name='upvote_comment'),
+    path(
+        'comment/<int:comment_id>/upvote/',
+        views.upvote_comment,
+        name='upvote_comment',
+    ),
 ]
