@@ -12,6 +12,119 @@ Here is a screenshot of the mobile view of the application:
 
 ![Mobile View](static/Images/Mobile.png)
 
+## Wireframe: Ireland's Talking
+
+- Main Page
+
+```
++-----------------------------------------------------------------+
+| Ireland's Talking                           [Login]  [Register] |
++-----------------------------------------------------------------+
++-----------------------------------------------------------------+
+|                                                                 |
+|   +-----------------------------------------------+             |
+|   | Post Title:                                   |             |
+|   | Author:                   |  Date  |          |             |
+|   +-----------------------------------------------+             |
+|                                                                 |
+|   +-----------------------------------------------+             |
+|   | Post Title:                                   |             |
+|   | Author:                   |  Date  |          |             |
+|   +-----------------------------------------------+             |
+|                                                                 |
+|   +-----------------------------------------------+             |
+|   | Post Title:                                   |             |
+|   | Author:                   |  Date  |          |             |
+|   +-----------------------------------------------+             |
+|                                                                 |
+|                   [Create New Post]                             |
+|                                                                 |
++-----------------------------------------------------------------+
+```
+- Post Page
+```
++-------------------------------------------------------------------------------------+
+| Ireland's Talking                                                 [ Logout ]        |
++-------------------------------------------------------------------------------------+
+|                                  Post Title                                         |
+|                              Post Author and Date                                   |
++-------------------------------------------------------------------------------------+
+|                                                                                     |
+| (Full post content here)                                                            |
+|                                                                                     |
+| Upvotes: 0        [Upvote Post]                                 Category:           |
++-------------------------------------------------------------------------------------+
+|                                        Comments                                     |
++-------------------------------------------------------------------------------------+
+| Post Reply: Post Content                                                            |
+| Upvotes:           [Upvote Comment]         [Delete Comment]                        |
++-------------------------------------------------------------------------------------+
+| Post Reply: Post Content                                                            |
+| Upvotes:           [Upvote Comment]         [Delete Comment]                        |
++-------------------------------------------------------------------------------------+
+| [ Add Comment Field ]                                                               |
+|                                                                                     |
+| [Add Comment]         [Edit Post]         [Delete Post]                             |
++-------------------------------------------------------------------------------------+
+```
+
+### Design Overview
+
+1. **Header**
+   - **Site Title/Logo:** “Ireland’s Talking” (top-left).
+   - **Auth Links:** 
+     - When logged out: “Login” and “Register” (top-right).
+     - When logged in: “Logout” and user profile/options.
+
+2. **All Posts (Main Content)**
+   - **Heading:** “All Posts” in a prominent position.
+   - **Posts List:** Each post is presented in a simple card-like layout that includes:
+     - **Title**
+     - **Author Name and Timestamp**
+     - **Optional Category or Tag**
+     - **Upvotes** (if desired, or link to post detail for more info)
+   - **Create a New Post Button:** Centered or clearly visible to encourage posting.
+
+3. **Post Detail View**
+   - **Title and Metadata:**
+     - Post title in a large, prominent font.
+     - Author name and post timestamp below the title.
+   - **Post Content:**
+     - Main text of the post.
+   - **Post Actions:**
+     - **Upvote Button/Count:** Displays current upvotes and allows user to upvote if logged in.
+     - **Edit/Delete Buttons:** Shown if the logged-in user is the post author.
+     - **Category:** If used, displayed near the upvote count or at the bottom of the post content.
+   - **Comments Section:**
+     - **Comment List:** Each comment includes author, timestamp, and upvote count.
+     - **Comment Actions:** Logged-in users can upvote or delete their own comments.
+     - **Add Comment Form:** Text area and submit button for logged-in users.
+       - If the user is not logged in, prompt them to log in to comment or upvote.
+
+
+### Design Considerations
+
+- **Responsive Layout:**
+  - Ensure the header (logo and auth links) rearrange or collapse on smaller screens.
+  - Both the All Posts page and the Post Detail page should adapt gracefully to mobile.
+
+- **Readability:**
+  - Use clear font sizes and spacing for titles, authors, timestamps, and body text.
+  - Ensure that upvote buttons and comment sections are easy to spot.
+
+- **Call-to-Action:**
+  - On the All Posts page, the “Create a New Post” button should stand out to prompt user engagement.
+  - On the Post Detail page, the “Add Comment” field should be visible and intuitive for logged-in users.
+
+- **User Flow & Permissions:**
+  - Differentiate between logged-in and logged-out users.
+    - Logged-out users see “Login” or “Register” prompts for actions like upvoting or commenting.
+    - Logged-in users see “Logout,” plus upvote/comment/edit/delete options if they own the post/comment.
+
+- **Consistency:**
+  - Keep headers and color schemes consistent across both pages.
+  - Use the same design language for post cards on the All Posts page and the post detail layout.
+
 ## Features
 
 ### Existing Features
