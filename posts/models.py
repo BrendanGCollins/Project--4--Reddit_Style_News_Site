@@ -68,6 +68,11 @@ class Comment(models.Model):
 
     # Timestamp for creation
     created_at = models.DateTimeField(auto_now_add=True)
+     
+    # New: Allow replies to be stored but remove parent link if a parent comment is deleted
+    parent = models.ForeignKey(
+        'self', null=True, blank=True, on_delete=models.SET_NULL, related_name='replies'
+    )
 
     # Track users who upvoted
     upvotes = models.ManyToManyField(
